@@ -232,15 +232,15 @@
     const bg = ctx.createLinearGradient(0, 0, 450, H);
     if (theme === "pasta") {
       bg.addColorStop(0, "#231534"); bg.addColorStop(.52, "#191528"); bg.addColorStop(1, "#0a102a");
-      glow(420, 275, 245, "#4a273b86"); glow(110, 580, 205, "#4e2e5590");
     } else if (theme === "gonzo") {
       bg.addColorStop(0, "#0b2032"); bg.addColorStop(.55, "#081c2b"); bg.addColorStop(1, "#101126");
-      glow(280, 160, 280, "#1b727e66");
     } else {
       bg.addColorStop(0, "#19143d"); bg.addColorStop(.5, "#0f1534"); bg.addColorStop(1, "#171028");
-      glow(125, 205, 270, "#4930747b"); glow(500, 515, 250, "#4f275d58");
     }
     ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+    if (theme === "pasta") { glow(420, 275, 245, "#4a273b86"); glow(110, 580, 205, "#4e2e5590"); }
+    else if (theme === "gonzo") glow(280, 160, 280, "#1b727e66");
+    else { glow(125, 205, 270, "#4930747b"); glow(500, 515, 250, "#4f275d58"); }
     for (const s of stars) {
       const y = ((s.y + (game ? game.time * s.speed * (theme === "gonzo" ? 4 : .5) : 0)) % H + H) % H;
       const a = .28 + .62 * (.5 + .5 * Math.sin((game ? game.time : 0) * 2 + s.phase));
