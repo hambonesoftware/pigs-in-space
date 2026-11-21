@@ -1,0 +1,19 @@
+name: Validate Cosmic Arcade
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check JavaScript syntax
+        run: |
+          node --check game.js
+          node --check sw.js
+      - name: Run arcade engine smoke test
+        run: node tests/smoke.mjs
