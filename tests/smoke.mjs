@@ -50,7 +50,7 @@ const drawingContext = new Proxy({}, {
 const ids = [
   "game", "menu", "gameView", "overlay", "controlHint", "fireText",
   "scoreText", "roundText", "livesText", "homeBest", "modeLabel",
-  "toast", "overlayIcon", "overlayKicker", "overlayTitle", "overlayText",
+  "toast", "overlayIcon", "overlayKicker", "overlayTitle", "overlayText", "overlayScore",
   "overlayMain", "overlaySecondary", "backButton", "pauseButton",
   "helpButton", "muteButton", "helpDialog"
 ];
