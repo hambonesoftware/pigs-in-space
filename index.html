@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1,user-scalable=no">
+  <meta name="theme-color" content="#090b20">
+  <meta name="description" content="Three outrageous arcade missions. An original, mobile-first homage to the 1983 Pigs in Space tripigathlon.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="./icon.svg">
+  <link rel="apple-touch-icon" href="./apple-icon.svg">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Pigs in Space · Cosmic Arcade</title>
+</head>
+<body>
+  <div id="app" class="app">
+    <header class="topbar">
+      <div class="brand" aria-label="Pigs in Space Cosmic Arcade">
+        <span class="brand-mark" aria-hidden="true">✦</span>
+        <span class="brand-name">PIGS <em>IN</em> SPACE <small>THE COSMIC ARCADE</small></span>
+      </div>
+      <div class="top-actions">
+        <button class="icon-button" id="helpButton" aria-label="How to play" title="How to play">?</button>
+        <button class="icon-button" id="muteButton" aria-label="Mute sound" title="Toggle sound">♫</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="menu" id="menu" aria-label="Mission selection">
+        <div class="menu-hero">
+          <div class="eyebrow"><span class="pulse-dot"></span> ARCADE TRANSMISSION · EST. 1983</div>
+          <div class="hero-orbit" aria-hidden="true"><span class="orbit-star orbit-one">✦</span><span class="orbit-star orbit-two">✳</span><span class="planet"></span><span class="orbit-ring"></span><span class="orbit-ship">🚀</span></div>
+          <h1>PIGS <span>IN</span><br><strong>SPACE<span class="bang">!</span></strong></h1>
+          <p class="hero-subtitle">THREE MISSIONS. ONE RIDICULOUS GALAXY.</p>
+          <p class="hero-copy">The galaxy needs heroes. Unfortunately, it got pigs.</p>
+        </div>
+
+        <div class="mission-heading"><span>CHOOSE YOUR ADVENTURE</span><span class="mission-divider"></span><span>01—03</span></div>
+        <div class="mission-grid">
+          <button class="mission-card chicken-card" data-mode="chicken">
+            <span class="mission-symbol" aria-hidden="true">🐔<span class="mini-spark">✦</span></span>
+            <span class="mission-info"><span class="mission-kicker">MISSION 01 · SHOOT 'EM UP</span><span class="mission-title">CHICKENVADERS</span><span class="mission-text">Blast space chickens. Dodge eggs. Save Planet Cluck.</span><span class="mission-cta">START MISSION <span aria-hidden="true">↗</span></span></span>
+          </button>
+          <button class="mission-card pasta-card" data-mode="pasta">
+            <span class="mission-symbol" aria-hidden="true">🍝<span class="mini-spark">✧</span></span>
+            <span class="mission-info"><span class="mission-kicker">MISSION 02 · DODGE & DASH</span><span class="mission-title">PASTAROIDS</span><span class="mission-text">Weave through cosmic pasta to reach your ship.</span><span class="mission-cta">START MISSION <span aria-hidden="true">↗</span></span></span>
+          </button>
+          <button class="mission-card gonzo-card" data-mode="gonzo">
+            <span class="mission-symbol" aria-hidden="true">🛸<span class="mini-spark">✷</span></span>
+            <span class="mission-info"><span class="mission-kicker">MISSION 03 · CANYON RUN</span><span class="mission-title">GONZOID ESCAPE</span><span class="mission-text">Fly the tunnels. Dodge pizza. Boomeray robots.</span><span class="mission-cta">START MISSION <span aria-hidden="true">↗</span></span></span>
+          </button>
+        </div>
+        <div class="menu-footer">
+          <div class="record"><span class="record-label">YOUR PERSONAL BEST</span><span class="record-value" id="homeBest">000000</span></div>
+          <div class="menu-note">NEW ARCADE · CLASSIC CHAOS · ZERO QUARTERS</div>
+        </div>
+      </section>
+
+      <section id="gameView" class="game-view hidden" aria-label="Arcade game">
+        <div class="game-head">
+          <button id="backButton" class="back-button" aria-label="Back to mission selection">← <span>MISSIONS</span></button>
+          <div class="mission-label" id="modeLabel">CHICKENVADERS</div>
+          <button id="pauseButton" class="pause-button" aria-label="Pause game">Ⅱ</button>
+        </div>
+        <div class="scorebar" aria-live="off">
+          <div class="stat"><small>SCORE</small><strong id="scoreText">000000</strong></div>
+          <div class="stat center-stat"><small>ROUND</small><strong id="roundText">01</strong></div>
+          <div class="stat lives-stat"><small>SHIELDS</small><strong id="livesText">♥ ♥ ♥ ♥ ♥</strong></div>
+        </div>
+        <div class="stage-shell">
+          <div id="stage" class="stage">
+            <canvas id="game" width="600" height="760" aria-label="Space arcade game; use touch controls or arrow keys and space to play"></canvas>
+            <div class="glass-glare" aria-hidden="true"></div>
+            <div id="toast" class="toast" aria-live="polite"></div>
+            <div id="overlay" class="game-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="overlayTitle">
+              <div class="overlay-content">
+                <div id="overlayIcon" class="overlay-icon">✦</div>
+                <div id="overlayKicker" class="overlay-kicker">MISSION COMPLETE</div>
+                <h2 id="overlayTitle">STELLAR WORK!</h2>
+                <p id="overlayText">You survived the universe's most ridiculous dangers.</p>
+                <div class="overlay-score"><span>TOTAL SCORE</span><strong id="overlayScore">000000</strong></div>
+                <button class="primary-button" id="overlayMain">NEXT MISSION →</button>
+                <button class="secondary-button" id="overlaySecondary">REPLAY MISSION</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="mobileControls" class="mobile-controls" aria-label="Game controls">
+          <div class="dpad" aria-label="Directional pad">
+            <button type="button" class="control direction up" data-control="up" aria-label="Move up">▲</button>
+            <button type="button" class="control direction left" data-control="left" aria-label="Move left">◀</button>
+            <span class="dpad-center" aria-hidden="true">✦</span>
+            <button type="button" class="control direction right" data-control="right" aria-label="Move right">▶</button>
+            <button type="button" class="control direction down" data-control="down" aria-label="Move down">▼</button>
+          </div>
+          <div class="control-hint" id="controlHint">MOVE + FIRE</div>
+          <button type="button" class="fire-button" data-control="fire" aria-label="Fire or karate chop"><span>✴</span><small id="fireText">FIRE</small></button>
+        </div>
+        <div class="desktop-hint">ARROWS / WASD TO MOVE <span>·</span> SPACE TO FIRE <span>·</span> P TO PAUSE</div>
+      </section>
+    </main>
+    <footer class="site-footer">AN UNOFFICIAL FAN-MADE TRIBUTE · ORIGINAL CODE & ART · NOT AFFILIATED WITH ATARI OR THE MUPPETS</footer>
+  </div>
+
+  <dialog id="helpDialog" class="help-dialog">
+    <form method="dialog">
+      <button class="dialog-close" aria-label="Close instructions">✕</button>
+      <div class="eyebrow">CAPTAIN'S BRIEFING</div>
+      <h2>HOW TO PLAY</h2>
+      <p>Choose any of the three missions. You start with five shields shared across your arcade run. Finish a round to earn points and unlock a tougher round.</p>
+      <div class="help-mission"><b>🐔 CHICKENVADERS</b><span>Move left/right. Fire sausages at space chickens; dodge their eggs. Clear the fleet to win.</span></div>
+      <div class="help-mission"><b>🍝 PASTAROIDS</b><span>Move in all four directions toward the moving ship at the top. Pasta knocks you back. Fire to karate-chop nearby meatballs.</span></div>
+      <div class="help-mission"><b>🛸 GONZOID ESCAPE</b><span>Fly through the canyon without touching the walls. Dodge pizzas and fire curved Boomerays at robots. Survive to the exit.</span></div>
+      <p class="help-small">Phone / tablet: on-screen D-pad and fire button. Desktop: arrow keys or WASD, Space to fire, P/Esc to pause. You can also steer by dragging on the game field.</p>
+      <button class="primary-button dialog-confirm">GOT IT, CAPTAIN!</button>
+    </form>
+  </dialog>
+  <script src="./game.js" defer></script>
+</body>
+</html>
